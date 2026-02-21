@@ -15,11 +15,8 @@ contract Todo {
     function createTask(string memory _title) external {
         todo_id = todo_id + 1;
         // Task memory task = Task(id, _title, false, 0);
-        // task id = 1
         Task memory task = Task({id: todo_id, title: _title, isComplete: false, timeCompleted: 0});
         tasks.push(task);
-        // this helps us to increment the id for subsequent calls or tasks
-        // that would be created.
     }
 
     function getAllTasks() external view returns (Task[] memory) {

@@ -27,6 +27,8 @@ contract SaveEther {
 
         require(userSavings_ > 0, "Insufficient funds");
 
+        require(_amount <= userSavings_, "You didn't save that much!!!");
+
         balances[msg.sender] = userSavings_ - _amount;
 
         // (bool result,) = msg.sender.call{value: msg.value}("");
