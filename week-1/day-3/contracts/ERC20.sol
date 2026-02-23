@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.3;
+import {IERC20} from "./IERC20.sol";
 
-contract ERC20 {
-    string constant NAME = "WEB3CXIV";
-    string constant SYMBOL = "CXIV";
+contract ERC20 is IERC20 {
+    string Name;
+    string Symbol;
     uint8 constant DECIMAL = 18;
+    address owner;
     // uint256 constant total_supply = 2_000_000_000_000_000_000_000;
     uint256 total_supply;
     // mapping(Key => Value ) balances;
@@ -13,15 +15,23 @@ contract ERC20 {
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
+    constructor(string memory _name, string memory _symbol, uint256 _totalSupply) {
+        Name = _name;
+        Symbol = _symbol;
+        owner = msg.sender;
+
+        _mint(owner, _totalSupply);
+    }
+
     function name() external view returns (string memory) {
-        return NAME;
+        return Name;
     }
 
     function symbol() external view returns (string memory) {
-        return SYMBOL;
+        return Symbol;
     }
 
-    function decimals() external view returns (uint8) {
+    function decimals() external pure returns (uint8) {
         return DECIMAL;
     }
 
@@ -37,7 +47,7 @@ contract ERC20 {
         return allowances[_owner][_spender];
     }
 
-    function mint(address _owner, uint256 _amount) external {
+    function _mint(address _owner, uint256 _amount) internal {
         require(_owner != address(0), "Can't transfer to address zero");
         total_supply = total_supply + _amount;
         balances[_owner] = balances[_owner] + _amount;
