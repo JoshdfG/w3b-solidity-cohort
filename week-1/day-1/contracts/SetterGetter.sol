@@ -4,7 +4,7 @@ pragma solidity ^0.8.28;
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-contract Lock {
+contract SetterGetter {
     // value types
     // bool keyword;
     // int256 time;
