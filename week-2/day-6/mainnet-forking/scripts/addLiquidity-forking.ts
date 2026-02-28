@@ -19,17 +19,17 @@ const main = async () => {
   const USDC = await ethers.getContractAt(
     "IERC20",
     USDCAddress,
-    impersonatedSigner,
+    impersonatedSigner
   );
   const DAI = await ethers.getContractAt(
     "IERC20",
     DAIAddress,
-    impersonatedSigner,
+    impersonatedSigner
   );
   const ROUTER = await ethers.getContractAt(
     "IUniswapV2Router",
     UNIRouter,
-    impersonatedSigner,
+    impersonatedSigner
   );
 
   await USDC.approve(UNIRouter, amountUSDC);
@@ -38,7 +38,7 @@ const main = async () => {
   const usdcBalBefore = await USDC.balanceOf(impersonatedSigner.address);
   const daiBalBefore = await DAI.balanceOf(impersonatedSigner.address);
   console.log(
-    "=================Before========================================",
+    "=================Before========================================"
   );
 
   console.log("USDC Balance before adding liquidity:", Number(usdcBalBefore));
@@ -52,7 +52,7 @@ const main = async () => {
     amountUSDCMin,
     amountDAIMin,
     impersonatedSigner.address,
-    deadline,
+    deadline
   );
 
   await tx.wait();
